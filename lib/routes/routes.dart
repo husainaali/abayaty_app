@@ -4,6 +4,10 @@ import 'package:go_router/go_router.dart';
 // import '../views/home_view/home_page_view.dart';
 // import '../views/login_view/login_page_view.dart';
 // import '../views/welcome_view/welcome_page_view.dart';
+import '../views/design_view/design_page_view.dart';
+import '../views/home_view/home_page_view.dart';
+import '../views/login_view/login_page_view.dart';
+import '../views/welcome_view/welcome_page_view.dart';
 import '../views/wrapper_view/wrapper_view.dart';
 
 part 'routes.g.dart';
@@ -32,37 +36,48 @@ class WrapperRoute extends GoRouteData {
   }
 }
 
-// @TypedGoRoute<WelcomePageViewRoute>(path: WelcomePageViewRoute.path)
-// class WelcomePageViewRoute extends GoRouteData {
-//   const WelcomePageViewRoute();
+@TypedGoRoute<WelcomePageViewRoute>(path: WelcomePageViewRoute.path)
+class WelcomePageViewRoute extends GoRouteData {
+  const WelcomePageViewRoute();
 
-//   static const path = '/welcome_page_view_path';
+  static const path = '/welcome_page_view_path';
 
-//   @override
-//   Widget build(BuildContext context, GoRouterState state) {
-//     return WelcomePageView();
-//   }
-// }
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return WelcomePageView();
+  }
+}
 
-// @TypedGoRoute<HomePageViewRoute>(path: HomePageViewRoute.path)
-// class HomePageViewRoute extends GoRouteData {
-//   const HomePageViewRoute();
+@TypedGoRoute<HomePageViewRoute>(path: HomePageViewRoute.path)
+class HomePageViewRoute extends GoRouteData {
+  const HomePageViewRoute();
 
-//   static const path = '/home_page_view_path';
+  static const path = '/home_page_view_path';
 
-//   @override
-//   Widget build(BuildContext context, GoRouterState state) {
-//     return HomePageView();
-//   }
-// }
-// @TypedGoRoute<LoginPageViewRoute>(path: LoginPageViewRoute.path)
-// class LoginPageViewRoute extends GoRouteData {
-//   const LoginPageViewRoute();
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return HomePageView();
+  }
+}
+@TypedGoRoute<LoginPageViewRoute>(path: LoginPageViewRoute.path)
+class LoginPageViewRoute extends GoRouteData {
+  const LoginPageViewRoute();
 
-//   static const path = '/login_page_view_path';
+  static const path = '/login_page_view_path';
 
-//   @override
-//   Widget build(BuildContext context, GoRouterState state) {
-//     return LoginPageView();
-//   }
-// }
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return LoginPageView();
+  }
+}
+@TypedGoRoute<DesignPageViewRoute>(path: DesignPageViewRoute.path)
+class DesignPageViewRoute extends GoRouteData {
+  const DesignPageViewRoute();
+
+  static const path = '/design_page_view_path';
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return DesignPageView();
+  }
+}
