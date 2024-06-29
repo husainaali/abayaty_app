@@ -1,23 +1,23 @@
-import 'package:auto_size_text/auto_size_text.dart';
+import 'dart:developer';
+
+import 'package:abaya_app/widgets/custom_widget_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:stacked/stacked.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 import '../../constants/constants_helper.dart';
-import '../../widgets/custom_widget_helper.dart';
-import 'design_page_view_model.dart';
+import 'home_page_view_model.dart';
 
-class DesignPageView extends StatelessWidget {
-  const DesignPageView({super.key});
+class ItemDetailsPageView extends StatelessWidget {
+  const ItemDetailsPageView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<DesignPageViewModel>.reactive(
-        viewModelBuilder: () => DesignPageViewModel(),
-        onViewModelReady: (model) => model.initialize(),
+    return ViewModelBuilder<HomePageViewModel>.reactive(
+        viewModelBuilder: () => HomePageViewModel(),
+        onViewModelReady: (model) => model.initializeDetailsPage(),
         builder: (context, model, child) => Scaffold(
-            backgroundColor: AppColor.appColorWhite,
-            body: Scaffold(
             appBar: customAppBarSmall(context),
             backgroundColor: AppColor.appColorMain,
             body: Stack(
@@ -55,6 +55,122 @@ class DesignPageView extends StatelessWidget {
                                         borderRadius: BorderRadius.circular(30),
                                       ),
                                       child: Image.asset("assets/abaya.png"),
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            color: const Color.fromARGB(
+                                                255, 100, 75, 71),
+                                            borderRadius: BorderRadius.only(
+                                              bottomLeft: Radius.circular(20),
+                                              topRight: Radius.circular(20),
+                                              bottomRight: Radius.circular(20),
+                                            ),
+                                          ),
+                                          child: Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Gap(20),
+                                              Text(
+                                                "Price",
+                                                style: TextStyle(
+                                                  color: Colors.grey,
+                                                  fontSize: 16,
+                                                ),
+                                              ),
+                                              Text(
+                                                "8.9",
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 60,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              Text(
+                                                "BHD",
+                                                style: TextStyle(
+                                                  color: Colors.grey,
+                                                  fontSize: 16,
+                                                ),
+                                              ),
+                                              Gap(20),
+                                            ],
+                                          ),
+                                        ),
+                                        Transform.scale(
+                                          scale: 0.6,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              IconButton(
+                                                style: ButtonStyle(
+                                                  backgroundColor:
+                                                      WidgetStateProperty.all(
+                                                          AppColor
+                                                              .appColorBlack),
+                                                ),
+                                                onPressed: () {
+                                                  model.itemQtyCounter("-");
+                                                },
+                                                icon: Icon(
+                                                  Icons.remove,
+                                                  color: AppColor.appColorWhite,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  width: customWidth(context,
+                                                      percentage: 0.18),
+                                                  height: customHeight(context,
+                                                      percentage: 0.05),
+                                                  child: Center(
+                                                      child: LimitedBox(
+                                                          child: AutoSizeText(
+                                                    model.itemQty.toString(),
+                                                    maxFontSize: 36,
+                                                    minFontSize: 24,
+                                                  )))),
+                                              IconButton(
+                                                style: ButtonStyle(
+                                                  backgroundColor:
+                                                      WidgetStateProperty.all(
+                                                          AppColor
+                                                              .appColorBlack),
+                                                ),
+                                                onPressed: () {
+                                                  model.itemQtyCounter("+");
+                                                },
+                                                icon: Icon(
+                                                  Icons.add,
+                                                  color: AppColor.appColorWhite,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+
+                                         ElevatedButton(
+                          child: Text(
+                            "Add Cart",
+                            style: TextStyle(color: Colors.white, fontSize: 18),
+                          ),
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  WidgetStateProperty.all(Colors.black)),
+                          onPressed: () {
+                       
+
+                          },
+                        ),
+                                      ],
                                     ),
                                   ),
                                 ],
@@ -343,6 +459,6 @@ class DesignPageView extends StatelessWidget {
                   ],
                 ))
               ],
-            ))));
+            )));
   }
 }
