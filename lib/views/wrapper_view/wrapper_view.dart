@@ -1,5 +1,5 @@
-import 'package:abaya_app/constants/constants_helper.dart';
-import 'package:abaya_app/views/home_view/home_page_view.dart';
+import 'package:abayaty_app/constants/constants_helper.dart';
+import 'package:abayaty_app/views/home_view/home_page_view.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
@@ -16,13 +16,11 @@ class WrapperView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<WrapperViewModel>.reactive(
         viewModelBuilder: () => WrapperViewModel(),
+
         onViewModelReady: (model) => model.initialize(context),
         builder: (context, model, child) => Scaffold(
-          bottomNavigationBar: 
-          model.selectedItem==5? null: 
-           ColoredBox(
-            color: AppColor.appColorMain,
-            child: bottomNavigationBar(context,model)),
-          body:model.busy? customLoading(): model.loggedIn ?  model.selectedPage:LoginPageView()));
+       bottomNavigationBar: model.selectedItem == 5?null:bottomNavigationBar(context,model),
+          body:model.busy? customLoading(): 
+          model.selectedPage));
   }
 }

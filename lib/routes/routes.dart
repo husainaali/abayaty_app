@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 // import '../views/home_view/home_page_view.dart';
 // import '../views/login_view/login_page_view.dart';
 // import '../views/welcome_view/welcome_page_view.dart';
+import '../views/cart_view/cart_list_page_view.dart';
 import '../views/design_view/design_page_view.dart';
 import '../views/home_view/home_page_view.dart';
 import '../views/home_view/item_details_page_view.dart';
@@ -91,5 +92,16 @@ class ItemDetailsPageViewRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return ItemDetailsPageView();
+  }
+}
+@TypedGoRoute<CartListPageViewRoute>(path: CartListPageViewRoute.path)
+class CartListPageViewRoute extends GoRouteData {
+  const CartListPageViewRoute();
+
+  static const path = '/cart_list_page_view_path';
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return CartListPageView();
   }
 }

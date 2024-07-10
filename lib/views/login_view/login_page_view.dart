@@ -1,4 +1,7 @@
-import 'package:abaya_app/widgets/custom_widget_helper.dart';
+import 'dart:developer';
+
+import 'package:abayaty_app/constants/constants_helper.dart';
+import 'package:abayaty_app/widgets/custom_widget_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:stacked/stacked.dart';
@@ -31,6 +34,22 @@ class LoginPageView extends StatelessWidget {
                 ),
               ),
             ),
+            Center(
+              child: SizedBox(
+                height: customHeight(context, percentage: 0.65),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: customHeight(context, percentage: 0.15),
+                      child: Image.asset(
+                        'assets/abayaty_logo.png',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
             Align(
               alignment: Alignment.bottomCenter,
               child: AnimatedContainer(
@@ -53,7 +72,8 @@ class LoginPageView extends StatelessWidget {
                     AnimatedCrossFade(
                       firstChild: Container(),
                       secondChild: Padding(
-                        padding: const EdgeInsets.only(top:25.0,bottom: 15.0,left:15,right: 15),
+                        padding: const EdgeInsets.only(
+                            top: 25.0, bottom: 15.0, left: 15, right: 15),
                         child: Column(
                           children: [
                             TextFormField(
@@ -87,7 +107,8 @@ class LoginPageView extends StatelessWidget {
                                         ? Icons.visibility_off
                                         : Icons.visibility,
                                   ),
-                                  onPressed:()=> model.togglePasswordVisibility("LoginPass"),
+                                  onPressed: () => model
+                                      .togglePasswordVisibility("LoginPass"),
                                 ),
                               ),
                               obscureText: model.obscureTextLoginPass,
@@ -115,37 +136,18 @@ class LoginPageView extends StatelessWidget {
                         child: ElevatedButton(
                           child: Text(
                             "Login",
-                            style: TextStyle(color: Colors.white, fontSize: 18),
+                            style: TextStyle(
+                                color: AppColor.appColorWhite, fontSize: 18),
                           ),
                           style: ButtonStyle(
-                              backgroundColor:
-                                  WidgetStateProperty.all(Colors.black)),
+                              backgroundColor: WidgetStateProperty.all(
+                                  AppColor.appColorBlack)),
                           onPressed: () {
+                            if (model.loginFieldsShow == true) {
+                              model.getUserData(context);
+                            }
                             model.loginFieldsShow = true;
                             model.registerFieldsShow = false;
-
-                            model.notifyListeners();
-                          },
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                          top: customHeight(context, percentage: 0.03)),
-                      child: SizedBox(
-                        width: customWidth(context, percentage: 0.85),
-                        height: customHeight(context, percentage: 0.06),
-                        child: ElevatedButton(
-                          child: Text(
-                            "Register",
-                            style: TextStyle(color: Colors.white, fontSize: 18),
-                          ),
-                          style: ButtonStyle(
-                              backgroundColor:
-                                  WidgetStateProperty.all(Colors.black)),
-                          onPressed: () {
-                            model.registerFieldsShow = true;
-                            model.loginFieldsShow = false;
                             model.notifyListeners();
                           },
                         ),
@@ -157,7 +159,8 @@ class LoginPageView extends StatelessWidget {
                     AnimatedCrossFade(
                       firstChild: Container(),
                       secondChild: Padding(
-                        padding: const EdgeInsets.only(top:8.0,bottom: 25.0,left:25,right: 25),
+                        padding: const EdgeInsets.only(
+                            top: 8.0, bottom: 25.0, left: 25, right: 25),
                         child: Column(
                           children: [
                             TextFormField(
@@ -191,7 +194,8 @@ class LoginPageView extends StatelessWidget {
                                         ? Icons.visibility_off
                                         : Icons.visibility,
                                   ),
-                                  onPressed:()=> model.togglePasswordVisibility("RegisterPass"),
+                                  onPressed: () => model
+                                      .togglePasswordVisibility("RegisterPass"),
                                 ),
                               ),
                               obscureText: model.obscureTextRegisterPass,
@@ -202,7 +206,7 @@ class LoginPageView extends StatelessWidget {
                                 return null;
                               },
                             ),
-                             SizedBox(
+                            SizedBox(
                               height: customHeight(context, percentage: 0.01),
                             ),
                             TextFormField(
@@ -221,7 +225,9 @@ class LoginPageView extends StatelessWidget {
                                         ? Icons.visibility_off
                                         : Icons.visibility,
                                   ),
-                                  onPressed:()=> model.togglePasswordVisibility("RegisterConfirmPass"),
+                                  onPressed: () =>
+                                      model.togglePasswordVisibility(
+                                          "RegisterConfirmPass"),
                                 ),
                               ),
                               obscureText: model.obscureTextRegisterConfirmPass,
@@ -235,8 +241,8 @@ class LoginPageView extends StatelessWidget {
                             SizedBox(
                               height: customHeight(context, percentage: 0.01),
                             ),
-                             TextFormField(
-                              controller: model.emailController,
+                            TextFormField(
+                              controller: model.mobileController,
                               decoration: InputDecoration(
                                 labelText: 'Mobile',
                                 hintText: 'Enter your mobile',
@@ -250,8 +256,8 @@ class LoginPageView extends StatelessWidget {
                             SizedBox(
                               height: customHeight(context, percentage: 0.01),
                             ),
-                             TextFormField(
-                              controller: model.emailController,
+                            TextFormField(
+                              controller: model.addressController,
                               decoration: InputDecoration(
                                 labelText: 'Address',
                                 hintText: 'Enter your address',
@@ -272,6 +278,49 @@ class LoginPageView extends StatelessWidget {
                           ? CrossFadeState.showSecond
                           : CrossFadeState.showFirst,
                       duration: Duration(milliseconds: 300),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          top: customHeight(context, percentage: 0.03)),
+                      child: SizedBox(
+                        width: customWidth(context, percentage: 0.85),
+                        height: customHeight(context, percentage: 0.06),
+                        child: ElevatedButton(
+                          child: Text(
+                            "Register",
+                            style: TextStyle(color: Colors.white, fontSize: 18),
+                          ),
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  WidgetStateProperty.all(Colors.black)),
+                          onPressed: () {
+                            if (model.registerFieldsShow == true) {
+                              if (model.emailController.text != "" &&
+                                  model.registerPassController.text != "" &&
+                                  model.mobileController.text != "" &&
+                                  model.addressController.text != "") {
+                                Map<String, dynamic> userData = {
+                                  "username": "${model.emailController.text}",
+                                  "password":
+                                      "${model.registerPassController.text}",
+                                  "mobile": "${model.mobileController.text}",
+                                  "address": "${model.addressController.text}",
+                                  "userType": "Admin"
+                                };
+                                model.saveUserData(context, userData);
+                              } else {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(SnackBar(
+                                  content: Text("Please fill all the fields!"),
+                                ));
+                              }
+                            }
+                            model.registerFieldsShow = true;
+                            model.loginFieldsShow = false;
+                            model.notifyListeners();
+                          },
+                        ),
+                      ),
                     ),
                   ],
                 ),

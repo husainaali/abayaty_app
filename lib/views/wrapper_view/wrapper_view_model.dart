@@ -1,8 +1,9 @@
 import 'dart:convert';
-import 'package:abaya_app/views/setting_view/setting_page_view.dart';
+import 'package:abayaty_app/views/login_view/login_page_view.dart';
+import 'package:abayaty_app/views/setting_view/setting_page_view.dart';
 import 'package:flutter/material.dart';
-import 'package:abaya_app/routes/routes.dart';
-import 'package:abaya_app/views/home_view/home_page_view.dart';
+import 'package:abayaty_app/routes/routes.dart';
+import 'package:abayaty_app/views/home_view/home_page_view.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../constants/strings.dart';
@@ -10,14 +11,12 @@ import '../../models/user.dart';
 import '../../services/locator_service.dart';
 import '../../services/shared_preferences_service.dart';
 import '../../services/base_model.dart';
+import '../design_view/design_list_page_view.dart';
 import '../design_view/design_page_view.dart';
 
 class WrapperViewModel extends BaseModel {
   late bool _loggedIn;
   bool get loggedIn => _loggedIn;
-  WrapperViewModel() {
-    _loggedIn = true;
-  }
 
   User? userData;
 
@@ -67,7 +66,7 @@ class WrapperViewModel extends BaseModel {
       selectedPage = const HomePageView();
       selectedItem = index;
     } else if (index == 1) {
-      selectedPage = const DesignPageView();
+      selectedPage = const DesignListPageView();
       selectedItem = index;
     } else {
       selectedPage = const SettingPageView();
@@ -83,16 +82,18 @@ class WrapperViewModel extends BaseModel {
 
   Future<void> isLogin() async {
     await _sharedPreferenceService
-        .getBoolData(AppString.isUserLogInKey)
+        .getBoolData("isLogin")
         .then((value) async {
       print(value);
-      _loggedIn = true;
+      _loggedIn = value;
       if (_loggedIn) {
-        print('object $_loggedIn');
-
+        selectedPage = HomePageView();
+        selectedItem = 0;
         notifyListeners();
       } else {
+        selectedPage = LoginPageView();
         selectedItem = 5;
+        notifyListeners();
       }
     });
   }

@@ -1,14 +1,40 @@
 part of 'custom_widget_helper.dart';
 
-AppBar customAppBarBig(BuildContext context, model) {
+AppBar customAppBarBig(BuildContext context, model,selectedPage) {
   return AppBar(
     actions: [
-      IconButton(
-      icon: const Icon(
-        Icons.shopping_bag_outlined,
-        color: AppColor.appColorWhite,
+      selectedPage=="Cart"?Container():IconButton(
+      icon: SizedBox(
+        height: 30,
+        width: 30,
+        child: Stack(
+          children: [
+           
+            Center(
+              child: const Icon(
+                Icons.shopping_bag_outlined,
+                color: AppColor.appColorWhite,
+              ),
+            ),
+             Align(
+              alignment: Alignment.topRight,
+              child: Container(
+                child: Center(
+                  child: Text("2",style: TextStyle(
+                    fontSize: 10,
+                    color: Colors.white),),
+                ),
+                height: 18,
+                width: 18,
+                decoration: BoxDecoration(
+                  color: Colors.red,
+                  borderRadius: BorderRadius.circular(30)),),
+            ),
+          ],
+        ),
       ),
       onPressed: () {
+        context.push(CartListPageViewRoute.path);
       },
     ),
     ],
@@ -24,14 +50,14 @@ AppBar customAppBarBig(BuildContext context, model) {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.only(top: 55),
+          padding: const EdgeInsets.only(top: 55,bottom: 10),
           child: Image.asset(
-            'assets/abaya_logo.png',
+            'assets/abayatysmall_logo.png',
             height: customHeight(context, percentage: 0.05),
           ),
         ),
       ),
-      bottom: PreferredSize(
+      bottom: selectedPage=="home"?PreferredSize(
         preferredSize:
             Size(customWidth(context), customHeight(context, percentage: 0.11)),
         child: SizedBox(
@@ -73,7 +99,7 @@ AppBar customAppBarBig(BuildContext context, model) {
             },
           ),
         ),
-      ));
+      ):PreferredSize(preferredSize:  Size(customWidth(context), customHeight(context, percentage: 0.03)), child: SizedBox()));
 }
 
 AppBar customAppBarSmall(BuildContext context) {
@@ -100,10 +126,13 @@ AppBar customAppBarSmall(BuildContext context) {
         ),
         child: SafeArea(
           child: Center(
-            child: Image.asset(
-              'assets/abaya_logo.png',
-              height: customHeight(context,
-                  percentage: 0.05), // Adjust this as needed
+            child: Padding(
+              padding: EdgeInsets.all(10),
+              child: Image.asset(
+                'assets/abayatysmall_logo.png',
+                height: customHeight(context,
+                    percentage: 0.04), // Adjust this as needed
+              ),
             ),
           ),
         ),

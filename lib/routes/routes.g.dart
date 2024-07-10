@@ -13,6 +13,7 @@ List<RouteBase> get $appRoutes => [
       $loginPageViewRoute,
       $designPageViewRoute,
       $itemDetailsPageViewRoute,
+      $cartListPageViewRoute,
     ];
 
 RouteBase get $wrapperRoute => GoRouteData.$route(
@@ -140,6 +141,29 @@ extension $ItemDetailsPageViewRouteExtension on ItemDetailsPageViewRoute {
 
   String get location => GoRouteData.$location(
         '/item_details_page_view_path',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $cartListPageViewRoute => GoRouteData.$route(
+      path: '/cart_list_page_view_path',
+      factory: $CartListPageViewRouteExtension._fromState,
+    );
+
+extension $CartListPageViewRouteExtension on CartListPageViewRoute {
+  static CartListPageViewRoute _fromState(GoRouterState state) =>
+      const CartListPageViewRoute();
+
+  String get location => GoRouteData.$location(
+        '/cart_list_page_view_path',
       );
 
   void go(BuildContext context) => context.go(location);

@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:abaya_app/widgets/custom_widget_helper.dart';
+import 'package:abayaty_app/widgets/custom_widget_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:stacked/stacked.dart';
@@ -156,20 +156,19 @@ class ItemDetailsPageView extends StatelessWidget {
                                             ],
                                           ),
                                         ),
-
-                                         ElevatedButton(
-                          child: Text(
-                            "Add Cart",
-                            style: TextStyle(color: Colors.white, fontSize: 18),
-                          ),
-                          style: ButtonStyle(
-                              backgroundColor:
-                                  WidgetStateProperty.all(Colors.black)),
-                          onPressed: () {
-                       
-
-                          },
-                        ),
+                                        ElevatedButton(
+                                          child: Text(
+                                            "Add Cart",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 18),
+                                          ),
+                                          style: ButtonStyle(
+                                              backgroundColor:
+                                                  WidgetStateProperty.all(
+                                                      Colors.black)),
+                                          onPressed: () {},
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -326,7 +325,7 @@ class ItemDetailsPageView extends StatelessWidget {
                       padding: const EdgeInsets.only(
                         left: 15.0,
                         right: 15.0,
-                        ),
+                      ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -339,7 +338,8 @@ class ItemDetailsPageView extends StatelessWidget {
                             text: TextSpan(
                               children: <TextSpan>[
                                 TextSpan(
-                                  text: 'Elegant Black Abaya with Embellished Details\n\n',
+                                  text:
+                                      'Elegant Black Abaya with Embellished Details\n\n',
                                   style: TextStyle(
                                     fontSize: 24,
                                     fontWeight: FontWeight.bold,

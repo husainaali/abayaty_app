@@ -1,5 +1,5 @@
-import 'package:abaya_app/routes/routes.dart';
-import 'package:abaya_app/widgets/custom_widget_helper.dart';
+import 'package:abayaty_app/routes/routes.dart';
+import 'package:abayaty_app/widgets/custom_widget_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stacked/stacked.dart';
@@ -17,7 +17,7 @@ class HomePageView extends StatelessWidget {
         viewModelBuilder: () => HomePageViewModel(),
         onViewModelReady: (model) => model.initialize(),
         builder: (context, model, child) => Scaffold(
-            appBar: customAppBarBig(context,model),
+            appBar: customAppBarBig(context,model,"home"),
             backgroundColor: AppColor.appColorMain,
             body: Stack(
               children: [
