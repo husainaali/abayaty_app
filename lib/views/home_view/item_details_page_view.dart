@@ -10,7 +10,8 @@ import '../../constants/constants_helper.dart';
 import 'home_page_view_model.dart';
 
 class ItemDetailsPageView extends StatelessWidget {
-  const ItemDetailsPageView({super.key});
+  final int index;
+  const ItemDetailsPageView({super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -167,7 +168,26 @@ class ItemDetailsPageView extends StatelessWidget {
                                               backgroundColor:
                                                   WidgetStateProperty.all(
                                                       Colors.black)),
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            model.addAbayatListItem(
+                                                "cartList",
+                                                AbayatList(
+                                                    id: model
+                                                        .abayatList[index].id,
+                                                    name: model
+                                                        .abayatList[index].name,
+                                                    description: model
+                                                        .abayatList[index]
+                                                        .description,
+                                                    price: model
+                                                        .abayatList[index]
+                                                        .price,
+                                                    imgPath: model
+                                                        .abayatList[index]
+                                                        .imgPath,
+                                                    qty: model.itemQty),
+                                                context);
+                                          },
                                         ),
                                       ],
                                     ),

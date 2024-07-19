@@ -91,7 +91,11 @@ class ItemDetailsPageViewRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return ItemDetailsPageView();
+        Map data = state.extra as Map;
+
+    return ItemDetailsPageView(
+            index: data['index'],
+    );
   }
 }
 @TypedGoRoute<CartListPageViewRoute>(path: CartListPageViewRoute.path)

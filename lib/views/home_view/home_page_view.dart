@@ -17,7 +17,7 @@ class HomePageView extends StatelessWidget {
         viewModelBuilder: () => HomePageViewModel(),
         onViewModelReady: (model) => model.initialize(),
         builder: (context, model, child) => Scaffold(
-            appBar: customAppBarBig(context,model,"home"),
+            appBar: customAppBarBig(context, model, "home"),
             backgroundColor: AppColor.appColorMain,
             body: Stack(
               children: [
@@ -34,11 +34,13 @@ class HomePageView extends StatelessWidget {
                 ),
                 SafeArea(
                     child: ListView.builder(
-                        itemCount: 5,
+                        itemCount: model.abayatList.length,
                         itemBuilder: (BuildContext context, index) {
                           return GestureDetector(
                             onTap: () {
-                              context.push(ItemDetailsPageViewRoute.path);
+                              context.push(ItemDetailsPageViewRoute.path, extra: {
+                                      'index': model.abayatList[index].id,
+                                    });
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(15.0),
@@ -72,12 +74,15 @@ class HomePageView extends StatelessWidget {
                                             ),
                                           ],
                                           color: AppColor.appColorBlack,
-                                          borderRadius: BorderRadius.circular(20),
+                                          borderRadius:
+                                              BorderRadius.circular(20),
                                         ),
                                         child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(20),
+                                          borderRadius:
+                                              BorderRadius.circular(20),
                                           child: Image.asset(
-                                            "assets/background.png",
+                                            model.abayatList[index].imgPath ??
+                                                "assets/background.png",
                                             fit: BoxFit.cover,
                                             height: customHeight(context,
                                                 percentage: 0.16),
@@ -86,31 +91,37 @@ class HomePageView extends StatelessWidget {
                                           ),
                                         ),
                                       ),
-                                      const Column(
+                                      Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
                                           LimitedBox(
-                                            child: AutoSizeText("Eid Abaya",
-                                                maxFontSize: 28, minFontSize: 22),
+                                            maxWidth: customWidth(context,
+                                                percentage: 0.3),
+                                            child: AutoSizeText(
+                                                model.abayatList[index].name,
+                                                maxFontSize: 28,
+                                                minFontSize: 22),
                                           ),
                                           SizedBox(
                                             height: 15,
                                           ),
                                           LimitedBox(
+                                            maxWidth: customWidth(context,
+                                                percentage: 0.3),
                                             child: AutoSizeText(
-                                              "Regular collection",
+                                              model.abayatList[index]
+                                                  .description,
                                               maxFontSize: 12,
                                               minFontSize: 6,
                                             ),
                                           )
                                         ],
                                       ),
-                                      const Padding(
-                                        padding:
-                                            EdgeInsets.only(right: 16.0),
+                                      Padding(
+                                        padding: EdgeInsets.only(right: 16.0),
                                         child: Column(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
@@ -126,8 +137,8 @@ class HomePageView extends StatelessWidget {
                                               children: [
                                                 LimitedBox(
                                                   child: AutoSizeText(
-                                                    "8.9",
-                                                    minFontSize: 28,
+                                                    "${model.abayatList[index].price}",
+                                                    minFontSize: 24,
                                                   ),
                                                 ),
                                                 LimitedBox(
